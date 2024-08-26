@@ -53,7 +53,7 @@ I advise you to use this vehicle without attracting attention. Or your account m
 
 ### Contribution
 
-Feel free to contribute by forking the repository and submitting pull requests.
+Feel free to contribute by working the repository and submitting pull requests.
 
 ### License
 
