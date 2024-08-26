@@ -1,9 +1,9 @@
-
+free Aviator predictor 
 <div align="center">
 
 # Aviator Predictor
 
-![logo-aviator](https://github.com/MuckPro/aviat/assets/138373919/f247efa9-e00d-44ae-bd9f-b600f6d854a2)
+![logo-aviator](https://github.com/djkPro/aviat/assets/138373919/f247efa9-e00d-44ae-bd9f-b600f6d854a2)
 
 [![Build Status](https://ci.appveyor.com/api/projects/status/1yii01mrx6ied4bt/branch/master?svg=true)](https://ci.appveyor.com/project/jbreckel/flow-result-checker/branch/master) 
 
@@ -32,7 +32,8 @@ This Tool shows you how many multipliers the lucky plane will fly to make it eas
 
 5. Password: You can find out by pressing Forgot Password
 
-5. After logging in, enter the seed of the latest game in the ```LAST GAME SEED``` section and click the ```Next``` button. If you see Done, you can click the START button and see the next multiplier.
+5. After logging in, enter the game in the ```round no ``` copy the round paste the app and original speed
+
 
 ## Preview
 
