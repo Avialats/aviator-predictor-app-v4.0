@@ -1,0 +1,129 @@
+{
+  "image": "mcr.microsoft.com/devcontainers/universal:2",
+  "features": {
+  }
+}
+
+Creating a development container (devcontainer) for an Aviator betting game involves setting up a development environment that includes all necessary dependencies and tools. Below, I'll guide you through creating a simple Aviator betting game using Node.js for the backend and React for the frontend, along with a devcontainer setup for GitHub Codespaces.
+
+### Step 1: Create a New Repository on GitHub
+
+1. Go to GitHub and create a new repository (e.g.,  `aviator-betting-game` ).
+2. Choose to initialize it with a README file.
+
+### Step 2: Open GitHub Codespaces
+
+1. In your new repository, click on the "Code" button, and then select "Open with Codespaces".
+2. Create a new Codespace.
+
+### Step 3: Set Up the Project Structure
+
+1. **Create the Project Files**:
+   In the Codespace terminal, create the following directories and files:
+mkdir aviator-betting-game
+cd aviator-betting-game
+mkdir backend frontend
+touch backend/server.js frontend/src/App.js frontend/src/index.js frontend/package.json backend/package.json
+### Step 4: Create the Devcontainer Configuration
+
+1. **Create a  `.devcontainer`  Directory**:
+   Inside your project root, create a directory named  `.devcontainer` :
+mkdir .devcontainer
+2. **Create  `devcontainer.json` **:
+   Inside the  `.devcontainer`  directory, create a file named  `devcontainer.json` :
+{
+    "name": "Aviator Betting Game",
+    "dockerFile": "Dockerfile",
+    "context": "..",
+    "postCreateCommand": "npm install --prefix backend && npm install --prefix frontend",
+    "remoteUser": "node"
+}
+3. **Create a  `Dockerfile` **:
+   Inside the  `.devcontainer`  directory, create a file named  `Dockerfile` :
+# Use the official Node.js image.
+FROM mcr.microsoft.com/vscode/devcontainers/javascript-node:0-14
+
+# Install any additional packages here.
+RUN apt-get update && apt-get install -y \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/*
+
+# Set the working directory.
+WORKDIR /workspace
+### Step 5: Set Up the Backend
+
+1. **Initialize the Backend**:
+   Navigate to the backend directory and initialize a Node.js project:
+cd backend
+npm init -y
+npm install express cors
+2. **Create a Simple Express Server**:
+   Edit the  `server.js`  file in the backend directory:
+// backend/server.js
+const express = require('express');
+const cors = require('cors');
+
+const app = express();
+const PORT = process.env.PORT || 5000;
+
+app.use(cors());
+app.use(express.json());
+
+app.get('/api', (req, res) => {
+    res.json({ message: 'Welcome to the Aviator Betting Game!' });
+});
+
+app.listen(PORT, () => {
+    console.log(`Server is running on http://localhost:${PORT}`);
+});
+### Step 6: Set Up the Frontend
+
+1. **Initialize the Frontend**:
+   Navigate to the frontend directory and create a React app:
+cd ../frontend
+npx create-react-app .
+2. **Modify the  `src/App.js` **:
+   Edit the  `src/App.js`  file to fetch data from the backend:
+// frontend/src/App.js
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
+
+function App() {
+    const [message, setMessage] = useState('');
+
+    useEffect(() => {
+        axios.get('http://localhost:5000/api')
+            .then(response => {
+                setMessage(response.data.message);
+            })
+            .catch(error => {
+                console.error('There was an error fetching the data!', error);
+            });
+    }, []);
+
+    return (
+        <div>
+            <h1>{message}</h1>
+        </div>
+    );
+}
+
+export default App;
+### Step 7: Run Your Application
+
+1. **Open the Command Palette** in Codespaces (Ctrl+Shift+P) and select  `Rebuild Container` .
+2. After the container is rebuilt, open a terminal in the Codespace and run the backend server:
+cd backend
+npm start
+3. In another terminal, run the frontend:
+cd frontend
+npm start
+### Step 8: Commit and Push Your Code
+
+1. In the terminal, navigate to the root of your project and commit your changes:
+git add .
+git commit -m "Initial commit of Aviator Betting Game with devcontainer"
+git push origin main
+### Summary
+
+You now have a basic Aviator betting game setup in GitHub Codespaces with a Node.js backend and a React frontend. The devcontainer configuration allows you to easily set up the development environment in Codespaces. You can expand this application by adding more features such as betting logic, user authentication, and a database for storing bets.
